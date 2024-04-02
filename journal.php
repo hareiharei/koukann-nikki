@@ -104,6 +104,8 @@ if (isset($_POST['send'])) {         //送信ボタンが押されたら
                 $message = "{$editting}番の日記を編集しました";
             }
 
+            //今後の課題: 写真アップロード機能の実装
+            
             //新規作成・編集完了
             showJournals();
             getId();
@@ -140,13 +142,12 @@ if (isset($_POST['send'])) {         //送信ボタンが押されたら
             $edit_answer = '';
             $edit_question = '';
         }
-        
         //今後の課題: 画像の変更の実装
 
         $message = "{$edit_id}番の日記を編集中です";
     }
 
-    //交換日記の削除
+//交換日記の削除
 } elseif (isset($_POST['delete'])) {  //削除ボタンが押されたら
     if (!empty($_POST['delete_id'])) {  //削除する日記の番号が選択されたら
         $delete_id = $_POST['delete_id'];
