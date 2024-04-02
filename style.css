@@ -1,0 +1,60 @@
+@charset "utf-8";
+
+body {
+    background-color: #EEFFFF;
+    font-family: "Meiryo";
+    text-align: center;
+    line-height: 2;
+}
+
+h1 {
+    color: white;
+    font-size: xx-large;
+}
+
+h2 {
+    color: #000022;
+    font-size: x-large;
+}
+
+h3 {
+    color: #000022;
+    font-size: large;
+}
+
+p {
+    color: #000022;
+    font-size: medium;
+}
+
+header {
+    background-color: #000077;
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.error {
+    color: #CC0000;
+}
+
+.journal {
+    width: 50%;
+    margin: 0 auto;
+    text-align: left; 
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    /* color: black; */
+    background-color: white;
+    border-radius: 2px;
+    /* font-weight: bold; */
+}
+.button:hover {
+    background-color: rgba(255, 255, 255, 0.911);
+}
