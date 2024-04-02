@@ -11,11 +11,6 @@ $message = "";
 $journals = "";
 $edit_id = 0;
 $editting = 0;
-//テスト用
-/*$my_id = 1;
-$friend_id = 9;
-$my_username = "username1";
-$friend_username = "username9";*/
 
 if ($my_id < $friend_id) {
     $id_1 = $my_id;
@@ -30,25 +25,6 @@ $journal_tablename = "journals_{$id_1}_{$id_2}";
 //データベース接続
 include "database_connect.php";
 dbc();
-
-//交換日記のテーブル作成 -> 友達追加された時にテーブルが作成される仕様に変更
-/*$sql =   "CREATE TABLE IF NOT EXISTS {$journal_tablename} "
-    . "("
-    . "id INT AUTO_INCREMENT PRIMARY KEY,"
-    . "sent INT,"
-    . "time VARCHAR(30),"
-    . "weather VARCHAR(10),"
-    . "happy TEXT,"
-    . "sad TEXT,"
-    . "food VARCHAR(30),"
-    . "music VARCHAR(30),"
-    . "answer TEXT,"
-    . "friend_question TEXT,"
-    . "my_question TEXT,"
-    . "photo_name TEXT,"
-    . "photo_path TEXT"
-    . ");";
-$pdo->query($sql);*/
 
 //最後に送信された交換日記を読み込む
 $sql = "SELECT * FROM {$journal_tablename} ORDER BY id DESC LIMIT 1";
@@ -128,53 +104,8 @@ if (isset($_POST['send'])) {         //送信ボタンが押されたら
                 $message = "{$editting}番の日記を編集しました";
             }
 
-
-            ////今後の課題: 写真のアップロード処理
-            /*if (isset($_FILES['photo']) && $_FILES['photo']['error'] == 0) {
-                $allowed = ['jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'gif' => 'image/gif', 'png' => 'image/png'];
-                $file_name = $_FILES['photo']['name'];
-                $file_type = $_FILES['photo']['type'];
-                $file_size = $_FILES['photo']['size'];
-                
-                // 拡張子とMIMEタイプの検証
-                $ext = pathinfo($file_name, PATHINFO_EXTENSION);
-                if (!array_key_exists($ext, $allowed) || !in_array($file_type, $allowed)) {
-                    $error_message = "許可されていないファイル形式です";
-                    exit();
-                }
-                
-                //ファイルサイズの検証
-                $max_size = 5 * 1024 * 1024;  //5MB
-                if ($file_size > $max_size) {
-                    $error_message = "ファイルサイズが大きすぎます";
-                    exit();
-                }
-                
-                $upload_dir = 'uploads/';
-                $upload_path = $upload_dir . basename($_FILES['photo']['name']);
-                if (!file_exists($upload_dir)) {
-                    mkdir($upload_dir, 0777, true);
-                }
-                
-                //ファイルを指定のディレクトリに移動
-                //$upload_path = 'uploads/' .basename($file_name);
-                if (move_uploaded_file($_FILES['photo']['tmp_name'], $upload_path)) {
-                    //写真のアップロードに成功 -> データベースに写真を追加
-                    $file_tmpname = $_FILES['photo']['tmp_name'];
-                    $photo_blob = file_get_contents($file_tmpname);
-                    
-                    $sql = "INSERT INTO {$journal_tablename} (photo) VALUES (:photo)";
-                    $stmt = $pdo -> prepare($sql);
-                    $stmt -> bindParam(':photo', $photo_blob, PDO::PARAM_LOB);
-                    $stmt -> execute();
-                    
-                } else {
-                    $error_message = "写真のアップロードに失敗しました";
-                }
-            } else {
-                $error_message = "写真のアップロードに関する問題があります";
-            }*/
-
+            //今後の課題: 写真アップロード機能の実装
+            
             //新規作成・編集完了
             showJournals();
             getId();
@@ -211,12 +142,13 @@ if (isset($_POST['send'])) {         //送信ボタンが押されたら
             $edit_answer = '';
             $edit_question = '';
         }
+                                    
         //今後の課題: 画像の変更の実装
 
         $message = "{$edit_id}番の日記を編集中です";
     }
 
-    //交換日記の削除
+//交換日記の削除
 } elseif (isset($_POST['delete'])) {  //削除ボタンが押されたら
     if (!empty($_POST['delete_id'])) {  //削除する日記の番号が選択されたら
         $delete_id = $_POST['delete_id'];
