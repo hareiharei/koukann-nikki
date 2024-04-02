@@ -3,7 +3,7 @@ function dbc()
 {
     global $pdo;
     global $error_message;
-    //データベース接続
+    //データベース接続　*部分にはユーザー名、パスワード、データベース名を入力
     try {
         $dsn = 'mysql:dbname=**********;host=localhost';
         $user = '*********';
