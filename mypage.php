@@ -4,15 +4,11 @@ $my_id = $_SESSION['id'];
 $my_username = $_SESSION['username'];
 
 //変数の初期設定
-//$my_id = 1;  //テスト用
-//$my_username = "username1";  //テスト用
 $friends_str = "";
 $friends_list = [];
-//$verified_friendname = "";
 $error_message_add = "";
 $error_message_select = "";
 $error_message = "";
-//$no_friendname = "";
 $friends_tablename = "friends_{$my_id}";
 
 //データベース接続
@@ -40,7 +36,6 @@ if (isset($_POST['add_friend'])) {  //追加ボタンが押されたら
             $friend_id = '';
             $verified_friendname = '';
         }
-
 
         //入力されたユーザーネームが既に友達として追加されていないか確認
         $sql = "SELECT * FROM {$friends_tablename} WHERE friend_name=:friend_name";
@@ -168,10 +163,6 @@ function addFriend($my_id, $friend_id, $friend_username)
     $stmt->execute();
 }
 
-// すべてのエラーを表示する
-error_reporting(E_ALL);
-// エラーレポートを有効にする
-ini_set('display_errors', 1);
 ?>
 
 <!DOCTYPE html>

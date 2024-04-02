@@ -15,12 +15,8 @@ $sql = 'CREATE TABLE IF NOT EXISTS users'
 .');';
 $stmt = $pdo -> query($sql);
         
-//showtable(); //テスト用
-        
 //変数の初期設定
 $error_message = "";
-//$table = ""; //テスト用
-//$signup_completed = false;
         
 //新規登録
 if (isset($_POST['signup'])) {  //登録ボタンが押されたら
@@ -49,8 +45,6 @@ if (isset($_POST['signup'])) {  //登録ボタンが押されたら
                 $stmt -> bindParam(':username', $input_username, PDO::PARAM_STR);
                 $stmt -> bindParam(':password', $hashed_password, PDO::PARAM_STR);
                 $stmt -> execute();
-                
-                //$error_message = "新規登録が完了しました";  //テスト用
                 
                 //追加したユーザーのIDを取得
                 $sql = "SELECT * FROM users WHERE username=:username";
@@ -92,26 +86,6 @@ if (isset($_POST['signup'])) {  //登録ボタンが押されたら
     }
     //今後の課題: ユーザーネーム、パスワードのバリデーション強化をしたい
 }
-
-//showtable(); //テスト用
-
-//テスト用
-/*function showtable(){
-    global $table;
-    global $sql;
-    global $pdo;
-    $table = "";
-    $sql = 'SELECT * FROM users';
-    $stmt = $pdo -> query($sql);
-    $results = $stmt -> fetchAll();
-    foreach ($results as $row) {
-        $table .= 'ID: '.$row['id'].' ユーザーネーム: '.$row['username'].' パスワード: '.$row['password']."<br>";
-    }
-}*/
-
-//テスト用
-error_reporting(E_ALL);     // すべてのエラーを表示する
-ini_set('display_errors', 1);   // エラーレポートを有効にする
 
 ?>
 

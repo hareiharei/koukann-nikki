@@ -5,20 +5,9 @@ session_start();
 include "database_connect.php";
 dbc();
 
-/*$sql = 'CREATE TABLE IF NOT EXSISTS users'
-.'('
-.'id INT AUTO_INCREMENT PRIMARY KEY,'
-.'username CHAR(20)'
-.'password CHAR(20)'
-.');';
-$stmt = $pdo -> query($sql);*/
-
 //変数の初期設定
 $error_message = "";
 $database_password = "";
-//$table = "";  //テスト用
-
-//showtable(); //テスト用
 
 //ログイン
 if (isset($_POST['login'])) {   //ログインボタンが押されたら
@@ -49,8 +38,6 @@ if (isset($_POST['login'])) {   //ログインボタンが押されたら
                 header("Location: mypage.php");
                 exit;
 
-                //$error_message = "ログインが完了しました";  //テスト用
-
             } elseif (empty($database_password)) {  //パスワードが存在しない(ユーザーネームも存在しない)場合 
                 $error_message = "このユーザーネームは登録されていません";
             } else {  //パスワードが存在するがパスワードが一致しない場合
@@ -67,30 +54,6 @@ if (isset($_POST['login'])) {   //ログインボタンが押されたら
 } else {
     $error_message = "";
 }
-
-//showtable(); //テスト用
-
-//テスト用
-/*function showtable(){
-    global $table;
-    global $sql;
-    global $pdo;
-    $table = "";
-    $sql = 'SELECT * FROM users';
-    $stmt = $pdo -> query($sql);
-    $results = $stmt -> fetchAll();
-    if ($results !== false) {
-        foreach ($results as $row) {
-        $table .= 'ID: '.$row['id'].' ユーザーネーム: '.$row['username'].' パスワード: '.$row['password']."<br>";
-    } else {
-        $table = '';
-    }
-    
-}*/
-
-//テスト用
-error_reporting(E_ALL);     // すべてのエラーを表示する
-ini_set('display_errors', 1);   // エラーレポートを有効にする
 
 ?>
 
